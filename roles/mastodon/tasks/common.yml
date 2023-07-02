@@ -18,7 +18,13 @@
     - lsb-release
     - ca-certificates
     - python3-dotenv
+    - snapd
     state: present
+
+- name: install snapd core
+  community.general.snap:
+    name: core
+    state: latest
 
 - name: secure ssh configs
   lineinfile:

@@ -13,9 +13,16 @@
 
 # Letsencrypt
 - name: installing certbot package
-  apt:
-    pkg:
-    - python3-certbot-nginx
+  community.general.snap:
+    name: certbot
+    channel: stable
+    classic: yes
+
+- name: linking certbot to /usr/bin
+  file:
+    src: /snap/bin/certbot
+    dest: /usr/bin/certbot
+    state: link
 
 - name: check DNS propogation
   ansible.builtin.shell: dig @8.8.8.8 +short {{ domain }}
